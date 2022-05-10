@@ -1,0 +1,677 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.BeautyProfileActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Beauty Concern"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/dismissBtn"
+            android:layout_width="35dp"
+            android:layout_height="35sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_baseline_clear_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view6"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:background="#FFDAE6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            android:layout_weight="5"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5">
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/bg_border"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="20sp"
+                    android:layout_height="20sp"
+                    android:src="@drawable/ic_baseline_phone_android_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/pink" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="Phone\nNumber"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/bg_border"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_baseline_email_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/pink" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Email\n"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/personalInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/bg_border"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_baseline_perm_device_information_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/pink" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Phone\nNumber"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/beautyProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/view4"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/bg_border"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_baseline_face_retouching_natural_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/pink" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="Beauty\nProfile"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/beautyConcern"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/bg_border"
+                    android:backgroundTint="@color/pink"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_baseline_tag_faces_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/white" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Beauty\nConcern"
+                    android:textAlignment="center"
+                    android:textColor="@color/pink"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view5" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Complete your Beauty Concern"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="16sp"
+            android:text="Skin Concerns"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="5dp"
+            android:text="You can select more than one option"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dehydrated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Dehydrated"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/acne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Acne"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/dehydrated"
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/wrinkles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Wrinkles"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/acne"
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sensitivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Sensitivity"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/dehydrated"
+            app:layout_constraintTop_toBottomOf="@+id/dehydrated" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/largePores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Large Pores"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/sensitivity"
+            app:layout_constraintTop_toBottomOf="@+id/dehydrated" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dullnes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Dullnes"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/largePores"
+            app:layout_constraintTop_toBottomOf="@+id/dehydrated" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/hyperpigmentation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Hyperpigmentation/Uneven Skin Tone"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/dehydrated"
+            app:layout_constraintTop_toBottomOf="@+id/sensitivity" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/roughness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Roughness"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/dehydrated"
+            app:layout_constraintTop_toBottomOf="@+id/hyperpigmentation" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/acneScars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Acne Scars"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/roughness"
+            app:layout_constraintTop_toBottomOf="@+id/hyperpigmentation" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/darkUndereyes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Dark Undereyes"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/roughness"
+            app:layout_constraintTop_toBottomOf="@+id/roughness" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/Sagging"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Sagging"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/darkUndereyes"
+            app:layout_constraintTop_toBottomOf="@+id/acneScars" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/blackOrWhiteHeads"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Black or White Heads"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/roughness"
+            app:layout_constraintTop_toBottomOf="@+id/darkUndereyes" />
+
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="16sp"
+            android:text="Body Concerns"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/blackOrWhiteHeads" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="5dp"
+            android:text="You can select more than one option"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/strechmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Stretch Mark"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sensitivity2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Sensitivity"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/strechmark"
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dryness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Dryness"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/sensitivity2"
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/hyperpigmentation2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Hyperpigmentation"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/strechmark" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cellulite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Cellulite"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/hyperpigmentation2"
+            app:layout_constraintTop_toBottomOf="@+id/sensitivity2" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bodyAcne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Body Acne"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/hyperpigmentation2"
+            app:layout_constraintTop_toBottomOf="@+id/hyperpigmentation2" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/unevenSkinTone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Uneven Skin Tone"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/bodyAcne"
+            app:layout_constraintTop_toBottomOf="@+id/cellulite" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/unwantedHall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Unwanted Hall"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/bodyAcne"
+            app:layout_constraintTop_toBottomOf="@+id/bodyAcne" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dullnes2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Dullness"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/unwantedHall"
+            app:layout_constraintTop_toBottomOf="@+id/unevenSkinTone" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/roughness2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Roughness"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/dullnes2"
+            app:layout_constraintTop_toBottomOf="@+id/unevenSkinTone" />
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/roughness2" />
+
+
+        <Button
+            android:id="@+id/saveBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/bg_rounded"
+            android:text="Save"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

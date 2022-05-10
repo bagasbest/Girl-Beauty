@@ -14,6 +14,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GirlBeauty">
         <activity
+            android:name=".ui.BeautyConcernActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.BeautyProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.PersonalInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.HomepageActivity"
+            android:exported="false"
+            android:label="@string/title_activity_homepage" />
+        <activity
             android:name=".auth.RegisterActivity"
             android:exported="false" />
         <activity
