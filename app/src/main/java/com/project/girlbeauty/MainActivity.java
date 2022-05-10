@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.project.girlbeauty.auth.LoginActivity;
+import com.project.girlbeauty.auth.RegisterActivity;
 import com.project.girlbeauty.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         binding.signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
             }
         });
 
