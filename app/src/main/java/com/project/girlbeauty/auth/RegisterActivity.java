@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,6 +24,7 @@ import com.project.girlbeauty.R;
 import com.project.girlbeauty.databinding.ActivityRegisterBinding;
 
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -48,9 +50,9 @@ public class RegisterActivity extends AppCompatActivity {
         binding.nextBtn.setOnClickListener(view -> {
             phone = binding.phone.getText().toString().trim();
             if (phone.isEmpty()) {
-                Toast.makeText(RegisterActivity.this, "Nomor Handphone tidak boleh kososng!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Phone number must be filled!", Toast.LENGTH_SHORT).show();
             } else if(phone.charAt(0) != '+') {
-                Toast.makeText(RegisterActivity.this, "Nomor Handphone harus diawali kode +62", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Phone number must followed by code +62", Toast.LENGTH_SHORT).show();
             }
             else {
                 binding.phone.setVisibility(View.GONE);
@@ -195,9 +197,12 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Username must be filled", Toast.LENGTH_SHORT).show();
         } else if (password.isEmpty()) {
             Toast.makeText(this, "Password must be filled", Toast.LENGTH_SHORT).show();
+        } else if (password.length() < 6) {
+            Toast.makeText(this, "Password minimum 6 character", Toast.LENGTH_SHORT).show();
         } else if (dob.isEmpty()) {
             Toast.makeText(this, "Date of birth must be filled", Toast.LENGTH_SHORT).show();
-        } else {
+        }
+        else {
 
             binding.progressBar.setVisibility(View.VISIBLE);
             FirebaseAuth.getInstance()
@@ -207,12 +212,16 @@ public class RegisterActivity extends AppCompatActivity {
                             saveDataToDB(email, username, dob);
                         } else {
                             binding.progressBar.setVisibility(View.GONE);
-                            showFailureDialog();
+                            try {
+                                throw Objects.requireNonNull(task.getException());
+                            } catch (FirebaseAuthUserCollisionException error) {
+                                showFailureDialog("This email already registered, pick another email");
+                            } catch (java.lang.Exception error) {
+                                Log.e("TAG", error.getMessage());
+                            }
                         }
                     });
-
         }
-
     }
 
     private void saveDataToDB(String email, String username, String dob) {
@@ -236,28 +245,28 @@ public class RegisterActivity extends AppCompatActivity {
                         showSuccessDialog();
                     } else {
                         binding.progressBar.setVisibility(View.GONE);
-                        showFailureDialog();
+                        showFailureDialog("Ups, your internet connection fail to register, please check your internet connection and try again later!");
                     }
                 });
     }
 
     /// munculkan dialog ketika gagal registrasi
-    private void showFailureDialog() {
+    private void showFailureDialog(String message) {
         new AlertDialog.Builder(this)
-                .setTitle("Gagal melakukan registrasi")
-                .setMessage("Silahkan mendaftar kembali dengan informasi yang benar")
+                .setTitle("Failure Register")
+                .setMessage(message)
                 .setIcon(R.drawable.ic_baseline_clear_24)
-                .setPositiveButton("OKE", (dialogInterface, i) -> dialogInterface.dismiss())
+                .setPositiveButton("OK", (dialogInterface, i) -> dialogInterface.dismiss())
                 .show();
     }
 
     /// munculkan dialog ketika sukses registrasi
     private void showSuccessDialog() {
         new AlertDialog.Builder(this)
-                .setTitle("Berhasil melakukan registrasi")
-                .setMessage("Silahkan login")
+                .setTitle("Success Register")
+                .setMessage("Please Login")
                 .setIcon(R.drawable.ic_baseline_check_circle_outline_24)
-                .setPositiveButton("OKE", (dialogInterface, i) -> {
+                .setPositiveButton("OK", (dialogInterface, i) -> {
                     dialogInterface.dismiss();
                     onBackPressed();
                 })

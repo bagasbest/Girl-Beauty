@@ -645,15 +645,183 @@
             app:layout_constraintTop_toBottomOf="@+id/unevenSkinTone" />
 
 
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="16sp"
+            android:text="Hair Concerns"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/unwantedHall" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="5dp"
+            android:text="You can select more than one option"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/damaged"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Damaged"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/bodyAcne"
+            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dandruff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Dandruff"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/damaged"
+            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dryness3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Dryness"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/dandruff"
+            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/flatness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Flatness"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/bodyAcne"
+            app:layout_constraintTop_toBottomOf="@+id/damaged" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/frizz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Frizz"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/damaged"
+            app:layout_constraintTop_toBottomOf="@+id/dandruff" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/greyHair"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Grey Hair"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/dandruff"
+            app:layout_constraintTop_toBottomOf="@+id/dryness3" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/hairLoss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Hair Loss"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/bodyAcne"
+            app:layout_constraintTop_toBottomOf="@+id/flatness" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/oilyScalp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Oily Scalp"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/damaged"
+            app:layout_constraintTop_toBottomOf="@+id/frizz" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sensitiveScalp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_border_phone"
+            android:paddingHorizontal="10dp"
+            android:text=" + Sensitive Scalp"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/bodyAcne"
+            app:layout_constraintTop_toBottomOf="@+id/hairLoss" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/splitEnds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/bg_border_phone"
+            android:layout_marginStart="16dp"
+            android:paddingHorizontal="10dp"
+            android:text=" + Split Ends"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/sensitiveScalp"
+            app:layout_constraintTop_toBottomOf="@+id/oilyScalp" />
+
+
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/roughness2" />
+            app:layout_constraintTop_toBottomOf="@+id/splitEnds" />
 
 
         <Button

@@ -394,7 +394,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:orientation="horizontal"
-            android:weightSum="4"
+            android:weightSum="5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10">
@@ -422,6 +422,13 @@
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/mediumDark"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                app:riv_corner_radius="100dp" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/dark"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
@@ -478,6 +485,142 @@
 
         </LinearLayout>
 
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What is your Hair Type ?"
+            android:textColor="@color/black"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView12">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/wavy"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                app:riv_corner_radius="100dp" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/straight"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                app:riv_corner_radius="100dp" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/curly"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                app:riv_corner_radius="100dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Colored Hair ?"
+            android:textColor="@color/black"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout8" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView13">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/yes"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                app:riv_corner_radius="100dp" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/no"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                app:riv_corner_radius="100dp" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hijabers ?"
+            android:textColor="@color/black"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout9" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView14">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/yes2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                app:riv_corner_radius="100dp" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/no2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                app:riv_corner_radius="100dp" />
+
+
+        </LinearLayout>
+
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
@@ -486,7 +629,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout10" />
 
 
         <Button
