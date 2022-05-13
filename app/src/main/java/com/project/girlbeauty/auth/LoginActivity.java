@@ -1,6 +1,5 @@
 package com.project.girlbeauty.auth;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,10 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.project.girlbeauty.R;
 import com.project.girlbeauty.databinding.ActivityLoginBinding;
@@ -27,21 +22,9 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        autoLogin();
+        binding.imageView.setOnClickListener(view -> onBackPressed());
 
-        binding.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
-        binding.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                formValidation();
-            }
-        });
+        binding.button.setOnClickListener(view -> formValidation());
     }
 
     private void formValidation() {
@@ -56,24 +39,15 @@ public class LoginActivity extends AppCompatActivity {
             binding.progressBar.setVisibility(View.VISIBLE);
 
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()) {
-                                binding.progressBar.setVisibility(View.GONE);
-                                startActivity(new Intent(LoginActivity.this, HomepageActivity.class));
-                            } else {
-                                binding.progressBar.setVisibility(View.GONE);
-                                showFailureDialog();
-                            }
+                    .addOnCompleteListener(task -> {
+                        if(task.isSuccessful()) {
+                            binding.progressBar.setVisibility(View.GONE);
+                            startActivity(new Intent(LoginActivity.this, HomepageActivity.class));
+                        } else {
+                            binding.progressBar.setVisibility(View.GONE);
+                            showFailureDialog();
                         }
                     });
-        }
-    }
-
-    private void autoLogin() {
-        if(FirebaseAuth.getInstance().getCurrentUser() != null) {
-            startActivity(new Intent(this, HomepageActivity.class));
         }
     }
 

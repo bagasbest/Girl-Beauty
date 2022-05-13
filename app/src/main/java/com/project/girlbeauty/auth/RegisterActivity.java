@@ -23,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.project.girlbeauty.R;
 import com.project.girlbeauty.databinding.ActivityRegisterBinding;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -77,6 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
         binding.verifyBtn.setOnClickListener(view -> formValidationOTP());
 
         binding.countdownTimer.setOnClickListener(view -> {
+            Log.e("taf", phone);
             sendOTP();
             countdownTimer();
         });
@@ -233,6 +235,19 @@ public class RegisterActivity extends AppCompatActivity {
         data.put("phone", phone);
         data.put("dob", dob);
         data.put("role", "user");
+        data.put("image", "");
+        data.put("fullName", "");
+        data.put("gender", "");
+        data.put("location", "");
+        data.put("skinType", "");
+        data.put("skinTone", "");
+        data.put("skinUnderTone", "");
+        data.put("hairType", "");
+        data.put("coloredHair", "");
+        data.put("hijabers", "");
+        data.put("skinConcern", null);
+        data.put("bodyConcern", null);
+        data.put("hairConcern", null);
 
         FirebaseFirestore
                 .getInstance()

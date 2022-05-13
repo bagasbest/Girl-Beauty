@@ -27,7 +27,16 @@ public class ProfileFragment extends Fragment {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        checkLogin();
+
         return root;
+    }
+
+    private void checkLogin() {
+        if(FirebaseAuth.getInstance().getCurrentUser() != null) {
+            binding.noLogin.setVisibility(View.GONE);
+            binding.content.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -40,6 +49,13 @@ public class ProfileFragment extends Fragment {
                 signOut();
             }
         });
+
+         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 startActivity(new Intent(getActivity(), MainActivity.class));
+             }
+         });
     }
 
     private void signOut() {

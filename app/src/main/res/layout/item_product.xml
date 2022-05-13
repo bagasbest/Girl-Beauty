@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
+    android:id="@+id/cv"
     android:layout_marginTop="16sp"
     android:layout_marginStart="16sp"
     app:cardElevation="10dp">
