@@ -1,6 +1,7 @@
 package com.project.girlbeauty.ui.ui;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +10,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.project.girlbeauty.R;
+import com.project.girlbeauty.ui.ui.home.ProductDetailActivity;
 import com.project.girlbeauty.ui.ui.home.ProductModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -54,7 +57,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     //// FUNGSI UNTUK MEMASUKKAN DATA DARI ARRAY LIST DIATAS KEDALAM ATRIBUT, SEHINGGA TERLIHAT NAMA, DESKRIPSI, RATING
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private CardView cv;
+        private ConstraintLayout cv;
         private ImageView image;
         private TextView name, description, rating, userReview;
 
@@ -78,6 +81,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             description.setText(model.getDescription());
             rating.setText(String.valueOf(model.getRating()));
             userReview.setText(String.valueOf(model.getUserReview()));
+
+            cv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(itemView.getContext(), ProductDetailActivity.class);
+                    intent.putExtra(ProductDetailActivity.EXTRA_DATA, model);
+                    itemView.getContext().startActivity(intent);
+                }
+            });
 
         }
     }

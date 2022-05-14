@@ -114,7 +114,9 @@ public class AddFragment extends Fragment {
             product.put("availableIn", availableIn);
             product.put("price", Long.parseLong(price));
             product.put("userReview", 0);
+            product.put("userRecommended", 0);
             product.put("rating", 0.0);
+            product.put("uid", uid);
 
             FirebaseFirestore
                     .getInstance()

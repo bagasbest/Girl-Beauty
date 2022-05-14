@@ -6,9 +6,11 @@ import android.os.Parcelable;
 public class ProductModel implements Parcelable {
 
     private String name;
+    private String uid;
     private String description;
     private Long price;
     private Long userReview;
+    private Long userRecommended;
     private double rating;
     private String image;
     private String availableIn;
@@ -17,6 +19,7 @@ public class ProductModel implements Parcelable {
 
     protected ProductModel(Parcel in) {
         name = in.readString();
+        uid = in.readString();
         description = in.readString();
         if (in.readByte() == 0) {
             price = null;
@@ -28,6 +31,11 @@ public class ProductModel implements Parcelable {
         } else {
             userReview = in.readLong();
         }
+        if (in.readByte() == 0) {
+            userRecommended = null;
+        } else {
+            userRecommended = in.readLong();
+        }
         rating = in.readDouble();
         image = in.readString();
         availableIn = in.readString();
@@ -36,6 +44,7 @@ public class ProductModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
+        dest.writeString(uid);
         dest.writeString(description);
         if (price == null) {
             dest.writeByte((byte) 0);
@@ -48,6 +57,12 @@ public class ProductModel implements Parcelable {
         } else {
             dest.writeByte((byte) 1);
             dest.writeLong(userReview);
+        }
+        if (userRecommended == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(userRecommended);
         }
         dest.writeDouble(rating);
         dest.writeString(image);
@@ -79,6 +94,14 @@ public class ProductModel implements Parcelable {
         this.name = name;
     }
 
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -101,6 +124,14 @@ public class ProductModel implements Parcelable {
 
     public void setUserReview(Long userReview) {
         this.userReview = userReview;
+    }
+
+    public Long getUserRecommended() {
+        return userRecommended;
+    }
+
+    public void setUserRecommended(Long userRecommended) {
+        this.userRecommended = userRecommended;
     }
 
     public double getRating() {

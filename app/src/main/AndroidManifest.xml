@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GirlBeauty">
         <activity
-            android:name=".ProductDetailActivity"
+            android:name=".ui.ui.home.ProductDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ui.ui.SearchActivity"
@@ -39,8 +39,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.HomepageActivity"
-            android:exported="true"
-            android:label="@string/title_activity_homepage">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -31,11 +31,13 @@ public class ProductVIewModel extends ViewModel {
                             for(QueryDocumentSnapshot document : task.getResult()) {
                                 ProductModel model = new ProductModel();
 
+                                model.setUid("" + document.get("uid"));
                                 model.setName("" + document.get("name"));
                                 model.setDescription("" + document.get("description"));
                                 model.setImage("" + document.get("image"));
                                 model.setAvailableIn("" + document.get("availableIn"));
                                 model.setPrice(document.getLong("price"));
+                                model.setUserRecommended(document.getLong("userRecommended"));
                                 model.setRating(document.getDouble("rating"));
                                 model.setUserReview(document.getLong("userReview"));
 
@@ -67,6 +69,7 @@ public class ProductVIewModel extends ViewModel {
                             for(QueryDocumentSnapshot document : task.getResult()) {
                                 ProductModel model = new ProductModel();
 
+                                model.setUid("" + document.get("uid"));
                                 model.setName("" + document.get("name"));
                                 model.setDescription("" + document.get("description"));
                                 model.setPrice(document.getLong("price"));
@@ -74,7 +77,7 @@ public class ProductVIewModel extends ViewModel {
                                 model.setAvailableIn("" + document.get("availableIn"));
                                 model.setRating(document.getDouble("rating"));
                                 model.setUserReview(document.getLong("userReview"));
-
+                                model.setUserRecommended(document.getLong("userRecommended"));
 
                                 productModelArrayList.add(model);
                             }

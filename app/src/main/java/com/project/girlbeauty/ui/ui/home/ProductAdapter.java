@@ -1,6 +1,7 @@
 package com.project.girlbeauty.ui.ui.home;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +78,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             description.setText(model.getDescription());
             rating.setText(String.valueOf(model.getRating()));
             userReview.setText(String.valueOf(model.getUserReview()));
+
+
+            cv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(itemView.getContext(), ProductDetailActivity.class);
+                    intent.putExtra(ProductDetailActivity.EXTRA_DATA, model);
+                    itemView.getContext().startActivity(intent);
+                }
+            });
 
         }
     }

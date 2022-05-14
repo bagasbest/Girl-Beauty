@@ -20,14 +20,18 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private ProductAdapter adapter;
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initRecyclerView();
+        initViewModel();
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        initRecyclerView();
-        initViewModel();
 
         return root;
     }
