@@ -13,6 +13,7 @@ public class ProductModel implements Parcelable {
     private Long userRecommended;
     private double rating;
     private String image;
+    private String userId;
     private String availableIn;
 
    public ProductModel(){}
@@ -38,6 +39,7 @@ public class ProductModel implements Parcelable {
         }
         rating = in.readDouble();
         image = in.readString();
+        userId = in.readString();
         availableIn = in.readString();
     }
 
@@ -66,6 +68,7 @@ public class ProductModel implements Parcelable {
         }
         dest.writeDouble(rating);
         dest.writeString(image);
+        dest.writeString(userId);
         dest.writeString(availableIn);
     }
 
@@ -148,6 +151,14 @@ public class ProductModel implements Parcelable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getAvailableIn() {

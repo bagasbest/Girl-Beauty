@@ -68,6 +68,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             userReview = itemView.findViewById(R.id.userReview);
         }
 
+        @SuppressLint({"DefaultLocale", "SetTextI18n"})
         public void bind(ProductModel model) {
 
             Glide.with(itemView.getContext())
@@ -76,8 +77,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
             name.setText(model.getName());
             description.setText(model.getDescription());
-            rating.setText(String.valueOf(model.getRating()));
-            userReview.setText(String.valueOf(model.getUserReview()));
+            rating.setText(String.format("%.1f",model.getRating()));
+            userReview.setText("(" + model.getUserReview() + ")");
 
 
             cv.setOnClickListener(new View.OnClickListener() {

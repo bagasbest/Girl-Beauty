@@ -1,4 +1,6 @@
-package com.project.girlbeauty.ui.ui.add;
+package com.project.girlbeauty.ui.ui.home;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -8,14 +10,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.github.dhaval2404.imagepicker.ImagePicker;
@@ -25,49 +21,58 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.project.girlbeauty.MainActivity;
 import com.project.girlbeauty.R;
-import com.project.girlbeauty.databinding.FragmentAddBinding;
+import com.project.girlbeauty.databinding.ActivityProductEditBinding;
+import com.project.girlbeauty.ui.HomepageActivity;
+import com.project.girlbeauty.ui.ui.add.AddFragment;
+
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
-public class AddFragment extends Fragment {
+public class ProductEditActivity extends AppCompatActivity {
 
-    private FragmentAddBinding binding;
+    public static final String EXTRA_DATA = "data";
+    private ActivityProductEditBinding binding;
+    private ProductModel model;
     private String dp;
     private String availableIn;
     private static final int REQUEST_FROM_GALLERY = 1001;
     private static final int REQUEST_FROM_AVAILABLE_IN = 1002;
     private ProgressDialog mProgressDialog;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-
-        binding = FragmentAddBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        mProgressDialog = new ProgressDialog(getActivity());
-
-        checkLogin();
-
-        return root;
-    }
-
-    private void checkLogin() {
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            binding.noLogin.setVisibility(View.GONE);
-            binding.content.setVisibility(View.VISIBLE);
-        }
-    }
-
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityProductEditBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        binding.loginBtn.setOnClickListener(view1 -> startActivity(new Intent(getActivity(), MainActivity.class)));
+        model = getIntent().getParcelableExtra(EXTRA_DATA);
+
+        dp = model.getImage();
+        availableIn = model.getAvailableIn();
+
+        Glide.with(this)
+                .load(dp)
+                .into(binding.image);
+
+        Glide.with(this)
+                .load(availableIn)
+                .into(binding.availableOnImage);
+
+        binding.productName.setText(model.getName());
+        binding.productDescription.setText(model.getDescription());
+        binding.productPrice.setText("" + model.getPrice());
+
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         binding.imageHint.setOnClickListener(view12 -> {
-            ImagePicker.with(AddFragment.this)
+            ImagePicker.with(this)
                     .galleryOnly()
                     .compress(1024)
                     .maxResultSize(1080, 1080)
@@ -75,13 +80,14 @@ public class AddFragment extends Fragment {
         });
 
         binding.availableOnImageHint.setOnClickListener(view13 -> {
-            ImagePicker.with(AddFragment.this)
+            ImagePicker.with(this)
                     .galleryOnly()
                     .compress(1024)
                     .start(REQUEST_FROM_AVAILABLE_IN);
         });
 
         binding.saveBtn.setOnClickListener(view14 -> formValidation());
+
     }
 
     private void formValidation() {
@@ -91,20 +97,15 @@ public class AddFragment extends Fragment {
 
         /// ini merpakan validasi kolom inputan, semua kolom wajib diisi
         if (name.isEmpty()) {
-            Toast.makeText(getActivity(), "Product name must be filled!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Product name must be filled!", Toast.LENGTH_SHORT).show();
         } else if (description.isEmpty()) {
-            Toast.makeText(getActivity(), "Product description must be filled!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Product description must be filled!", Toast.LENGTH_SHORT).show();
         } else if (price.isEmpty()) {
-            Toast.makeText(getActivity(), "Product price must be filled!", Toast.LENGTH_SHORT).show();
-        } else if(dp == null) {
-            Toast.makeText(getActivity(), "Product image must be filled!", Toast.LENGTH_SHORT).show();
-        } else if (availableIn == null){
-            Toast.makeText(getActivity(), "Available in, must be filled!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Product price must be filled!", Toast.LENGTH_SHORT).show();
         }
         else {
             binding.progressBar.setVisibility(View.VISIBLE);
-            String uid = String.valueOf(System.currentTimeMillis());
-            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
             // SIMPAN DATA PERALATAN KAMERA KE DATABASE
             Map<String, Object> product = new HashMap<>();
@@ -114,17 +115,12 @@ public class AddFragment extends Fragment {
             product.put("image", dp);
             product.put("availableIn", availableIn);
             product.put("price", Long.parseLong(price));
-            product.put("userReview", 0);
-            product.put("userRecommended", 0);
-            product.put("userId", userId);
-            product.put("rating", 0.0);
-            product.put("uid", uid);
 
             FirebaseFirestore
                     .getInstance()
                     .collection("product")
-                    .document(uid)
-                    .set(product)
+                    .document(model.getUid())
+                    .update(product)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             binding.progressBar.setVisibility(View.GONE);
@@ -139,8 +135,8 @@ public class AddFragment extends Fragment {
 
     /// tampilkan dialog box ketika gagal mengupload
     private void showFailureDialog() {
-        new AlertDialog.Builder(getActivity())
-                .setTitle("Failure Upload Product")
+        new AlertDialog.Builder(this)
+                .setTitle("Failure Update Product")
                 .setMessage("Ups, your internet connection fail to register, please check your internet connection and try again later!")
                 .setIcon(R.drawable.ic_baseline_clear_24)
                 .setPositiveButton("OKE", (dialogInterface, i) -> {
@@ -151,17 +147,17 @@ public class AddFragment extends Fragment {
 
     /// tampilkan dialog box ketika sukses mengupload
     private void showSuccessDialog() {
-        new AlertDialog.Builder(getActivity())
-                .setTitle("Success Upload Product")
+        new AlertDialog.Builder(this)
+                .setTitle("Success Update Product")
                 .setMessage("Product will be released soon!")
                 .setIcon(R.drawable.ic_baseline_check_circle_outline_24)
                 .setPositiveButton("OKE", (dialogInterface, i) -> {
                     dialogInterface.dismiss();
-                    binding.productName.setText("");
-                    binding.productDescription.setText("");
-                    binding.productPrice.setText("");
-                    dp = null;
-                    availableIn = null;
+                    Intent intent = new Intent(this, HomepageActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    dialogInterface.dismiss();
+                    startActivity(intent);
+                    finish();
                 })
                 .show();
     }
@@ -185,6 +181,7 @@ public class AddFragment extends Fragment {
     /// fungsi untuk mengupload foto kedalam cloud storage
     private void uploadDp(Uri data, String option) {
         StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+        mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Uploading process...");
         mProgressDialog.setCanceledOnTouchOutside(false);
         mProgressDialog.show();
@@ -195,7 +192,7 @@ public class AddFragment extends Fragment {
                         mStorageRef.child(imageFileName).getDownloadUrl()
                                 .addOnSuccessListener(uri -> {
                                     mProgressDialog.dismiss();
-                                    if (Objects.equals(option, "image")) {
+                                    if (option.equals("image")) {
                                         dp = uri.toString();
                                         Glide
                                                 .with(this)
@@ -211,19 +208,19 @@ public class AddFragment extends Fragment {
                                 })
                                 .addOnFailureListener(e -> {
                                     mProgressDialog.dismiss();
-                                    Toast.makeText(getActivity(), "Failure upload image", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(this, "Failure upload image", Toast.LENGTH_SHORT).show();
                                     Log.d("imageDp: ", e.toString());
                                 }))
                 .addOnFailureListener(e -> {
                     mProgressDialog.dismiss();
-                    Toast.makeText(getActivity(), "Failure upload image", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Failure upload image", Toast.LENGTH_SHORT).show();
                     Log.d("imageDp: ", e.toString());
                 });
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    protected void onDestroy() {
+        super.onDestroy();
         binding = null;
     }
 }

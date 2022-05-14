@@ -32,6 +32,7 @@ public class ProductVIewModel extends ViewModel {
                                 ProductModel model = new ProductModel();
 
                                 model.setUid("" + document.get("uid"));
+                                model.setUserId("" + document.get("userId"));
                                 model.setName("" + document.get("name"));
                                 model.setDescription("" + document.get("description"));
                                 model.setImage("" + document.get("image"));
@@ -70,6 +71,7 @@ public class ProductVIewModel extends ViewModel {
                                 ProductModel model = new ProductModel();
 
                                 model.setUid("" + document.get("uid"));
+                                model.setUserId("" + document.get("userId"));
                                 model.setName("" + document.get("name"));
                                 model.setDescription("" + document.get("description"));
                                 model.setPrice(document.getLong("price"));

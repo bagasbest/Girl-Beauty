@@ -1,6 +1,7 @@
 package com.project.girlbeauty.ui.ui.home;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
@@ -17,7 +18,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,6 +51,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     private ProductModel model;
     private ReviewAdapter adapter;
     private final ArrayList<ReviewModel> listReview = new ArrayList<>();
+    private final ArrayList<ReviewModel> newListReview = new ArrayList<>();
     private boolean isRecommended = false;
     private int totalUser;
 
@@ -91,6 +92,11 @@ public class ProductDetailActivity extends AppCompatActivity {
                 isRecommended = true;
             }
 
+            if(model.getUserId().equals(uid)) {
+                binding.edit.setVisibility(View.VISIBLE);
+                binding.delete.setVisibility(View.VISIBLE);
+            }
+
             binding.backButton.setOnClickListener(view -> {
                 onBackPressed();
             });
@@ -109,6 +115,22 @@ public class ProductDetailActivity extends AppCompatActivity {
                 }
             });
 
+            binding.delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    confirmDelete();
+                }
+            });
+
+            binding.edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ProductDetailActivity.this, ProductEditActivity.class);
+                    intent.putExtra(ProductEditActivity.EXTRA_DATA, model);
+                    startActivity(intent);
+                }
+            });
+
         } else {
             binding.loginBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -117,6 +139,39 @@ public class ProductDetailActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void confirmDelete() {
+        new AlertDialog.Builder(this)
+                .setTitle("Confirm Delete Product")
+                .setMessage("Are you sure want to delete this product ?")
+                .setIcon(R.drawable.ic_baseline_warning_24)
+                .setPositiveButton("YES", (dialogInterface, i) -> {
+                   deleteProduct();
+                })
+                .setNegativeButton("NO", (dialog, i) -> {
+                    dialog.dismiss();
+                })
+                .show();
+    }
+
+    private void deleteProduct() {
+        FirebaseFirestore
+                .getInstance()
+                .collection("product")
+                .document(model.getUid())
+                .delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()) {
+                           onBackPressed();
+                            Toast.makeText(ProductDetailActivity.this, "Success delete this product!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(ProductDetailActivity.this, "Failure delete this product!, please check internet connection and try again later!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     @SuppressLint("ResourceType")
@@ -221,7 +276,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                                 .getInstance()
                                 .collection("product")
                                 .document(model.getUid())
-                                .collection(review)
+                                .collection("review")
                                 .document(uid)
                                 .set(users)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -229,45 +284,78 @@ public class ProductDetailActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
 
                                         if (task.isSuccessful()) {
+                                            if(listReview.size() > 0) {
+                                                /// get new review on db
+                                                ReviewViewModel viewModel = new ViewModelProvider(ProductDetailActivity.this).get(ReviewViewModel.class);
+                                                viewModel.setListReview(model.getUid());
+                                                viewModel.getReview().observe(ProductDetailActivity.this, reviewList -> {
+                                                    newListReview.clear();
+                                                    newListReview.addAll(reviewList);
+                                                });
 
-                                            /// get new review on db
-                                            ReviewViewModel viewModel = new ViewModelProvider(ProductDetailActivity.this).get(ReviewViewModel.class);
-                                            viewModel.setListReview(model.getUid());
-                                            viewModel.getReview().observe(ProductDetailActivity.this, reviewList -> {
-                                                if (reviewList.size() > 0) {
-                                                    double totalStar = 0.0;
-                                                    /// get average rating, get userReview
-                                                    for (int i = 0; i < reviewList.size(); i++) {
-                                                        totalStar += listReview.get(i).getRating();
-                                                    }
+                                                final Handler handler = new Handler(Looper.getMainLooper());
+                                                handler.postDelayed(new Runnable() {
+                                                    @SuppressLint({"SetTextI18n", "DefaultLocale"})
+                                                    @Override
+                                                    public void run() {
+                                                        double totalStar = 0.0;
+                                                        /// get average rating, get userReview
+                                                        for (int i = 0; i < newListReview.size(); i++) {
+                                                            totalStar += newListReview.get(i).getRating();
+                                                        }
 
-                                                    Map<String, Object> data = new HashMap<>();
-                                                    data.put("userReview", listReview.size());
-                                                    data.put("rating", totalStar / Double.parseDouble(String.valueOf(listReview.size())));
+                                                        Map<String, Object> data = new HashMap<>();
+                                                        data.put("userReview", newListReview.size());
+                                                        data.put("rating", totalStar / Double.parseDouble(String.valueOf(newListReview.size())));
 
-                                                    FirebaseFirestore
-                                                            .getInstance()
-                                                            .collection("product")
-                                                            .document(model.getUid())
-                                                            .update(data)
-                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                @Override
-                                                                public void onComplete(@NonNull Task<Void> task) {
-                                                                    if (task.isSuccessful()) {
-                                                                        pb.setVisibility(View.GONE);
-                                                                        Toast.makeText(ProductDetailActivity.this, "Success give rating", Toast.LENGTH_SHORT).show();
-                                                                        initRecyclerView();
-                                                                        getRatingAndReview();
-                                                                    } else {
-                                                                        pb.setVisibility(View.GONE);
-                                                                        Toast.makeText(ProductDetailActivity.this, "Ups, failure to give rating and review, please check your internet connection!", Toast.LENGTH_SHORT).show();
+                                                        FirebaseFirestore
+                                                                .getInstance()
+                                                                .collection("product")
+                                                                .document(model.getUid())
+                                                                .update(data)
+                                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                        if (task.isSuccessful()) {
+                                                                            pb.setVisibility(View.GONE);
+                                                                            Toast.makeText(ProductDetailActivity.this, "Success give rating", Toast.LENGTH_SHORT).show();
+                                                                            initRecyclerView();
+                                                                            getRatingAndReview();
+                                                                            dialog.dismiss();
+                                                                        } else {
+                                                                            pb.setVisibility(View.GONE);
+                                                                            Toast.makeText(ProductDetailActivity.this, "Ups, failure to give rating and review, please check your internet connection!", Toast.LENGTH_SHORT).show();
+                                                                        }
                                                                     }
+                                                                });
+                                                    }
+                                                },1000);
+                                            } else {
+                                                Map<String, Object> data = new HashMap<>();
+                                                data.put("userReview", 1);
+                                                data.put("rating", rating);
+
+                                                FirebaseFirestore
+                                                        .getInstance()
+                                                        .collection("product")
+                                                        .document(model.getUid())
+                                                        .update(data)
+                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                if (task.isSuccessful()) {
+                                                                    pb.setVisibility(View.GONE);
+                                                                    Toast.makeText(ProductDetailActivity.this, "Success give rating", Toast.LENGTH_SHORT).show();
+                                                                    initRecyclerView();
+                                                                    getRatingAndReview();
+                                                                    dialog.dismiss();
+                                                                } else {
+                                                                    pb.setVisibility(View.GONE);
+                                                                    Toast.makeText(ProductDetailActivity.this, "Ups, failure to give rating and review, please check your internet connection!", Toast.LENGTH_SHORT).show();
                                                                 }
-                                                            });
-
-                                                }
-                                            });
-
+                                                            }
+                                                        });
+                                            }
 
                                         } else {
                                             pb.setVisibility(View.GONE);
@@ -281,8 +369,6 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     private void getRecommendedUsers() {
         long recommendedUser = model.getUserRecommended();
-
-        Log.e("taf", String.valueOf(recommendedUser));
 
         FirebaseFirestore
                 .getInstance()
@@ -376,42 +462,42 @@ public class ProductDetailActivity extends AppCompatActivity {
 
                 double view1 = Double.parseDouble(String.valueOf(star1)) / Double.parseDouble(String.valueOf(listReview.size()));
                 // Define new constraints for the child (or multiple children as the case may be).
-                if (view1 <= 0.50) {
+                if (view1 <= 0.40) {
                     mConstraintSet.constrainPercentWidth(R.id.view17, Float.parseFloat(String.valueOf(view1)));
-                } else if (view1 > 0.50) {
-                    mConstraintSet.constrainPercentWidth(R.id.view17, 0.50F);
+                } else if (view1 > 0.40) {
+                    mConstraintSet.constrainPercentWidth(R.id.view17, 0.40F);
                 }
 
                 double view2 = Double.parseDouble(String.valueOf(star2)) / Double.parseDouble(String.valueOf(listReview.size()));
                 // Define new constraints for the child (or multiple children as the case may be).
-                if (view2 <= 0.50) {
+                if (view2 <= 0.40) {
                     mConstraintSet.constrainPercentWidth(R.id.view16, Float.parseFloat(String.valueOf(view2)));
-                } else if (view2 > 0.50) {
-                    mConstraintSet.constrainPercentWidth(R.id.view16, 0.50F);
+                } else if (view2 > 0.40) {
+                    mConstraintSet.constrainPercentWidth(R.id.view16, 0.40F);
                 }
 
                 double view3 = Double.parseDouble(String.valueOf(star3)) / Double.parseDouble(String.valueOf(listReview.size()));
                 // Define new constraints for the child (or multiple children as the case may be).
-                if (view3 <= 0.50) {
+                if (view3 <= 0.40) {
                     mConstraintSet.constrainPercentWidth(R.id.view15, Float.parseFloat(String.valueOf(view3)));
-                } else if (view3 > 0.50) {
-                    mConstraintSet.constrainPercentWidth(R.id.view15, 0.50F);
+                } else if (view3 > 0.40) {
+                    mConstraintSet.constrainPercentWidth(R.id.view15, 0.40F);
                 }
 
                 double view4 = Double.parseDouble(String.valueOf(star4)) / Double.parseDouble(String.valueOf(listReview.size()));
                 // Define new constraints for the child (or multiple children as the case may be).
-                if (view4 <= 0.50) {
+                if (view4 <= 0.40) {
                     mConstraintSet.constrainPercentWidth(R.id.view14, Float.parseFloat(String.valueOf(view4)));
-                } else if (view4 > 0.50) {
-                    mConstraintSet.constrainPercentWidth(R.id.view14, 0.50F);
+                } else if (view4 > 0.40) {
+                    mConstraintSet.constrainPercentWidth(R.id.view14, 0.40F);
                 }
 
                 double view5 = Double.parseDouble(String.valueOf(star5)) / Double.parseDouble(String.valueOf(listReview.size()));
                 // Define new constraints for the child (or multiple children as the case may be).
-                if (view5 <= 0.50) {
+                if (view5 <= 0.40) {
                     mConstraintSet.constrainPercentWidth(R.id.view13, Float.parseFloat(String.valueOf(view5)));
-                } else if (view5 > 0.50) {
-                    mConstraintSet.constrainPercentWidth(R.id.view13, 0.50F);
+                } else if (view5 > 0.40) {
+                    mConstraintSet.constrainPercentWidth(R.id.view13, 0.40F);
                 }
 
                 // Apply the constraints for the child view to the parent layout.

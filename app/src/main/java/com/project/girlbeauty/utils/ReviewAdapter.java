@@ -16,6 +16,7 @@ import com.project.girlbeauty.R;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> {
 
@@ -57,19 +58,31 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image);
-            name = itemView.findViewById(R.id.title);
+            name = itemView.findViewById(R.id.fullName);
             beautyProfile = itemView.findViewById(R.id.beautyProfile);
             review = itemView.findViewById(R.id.review);
         }
 
+        @SuppressLint("SetTextI18n")
         public void bind(ReviewModel model) {
 
-            Glide.with(itemView.getContext())
-                    .load(model.getImage())
-                    .into(image);
+            if(!model.getImage().equals("")) {
+                Glide.with(itemView.getContext())
+                        .load(model.getImage())
+                        .into(image);
+            } else {
+                Glide.with(itemView.getContext())
+                        .load(R.drawable.ic_baseline_tag_faces_24_2)
+                        .into(image);
+            }
+
 
             name.setText(model.getName());
-            beautyProfile.setText(model.getBeautyProfile());
+            if(!model.getBeautyProfile().equals(", , ")) {
+                beautyProfile.setText(model.getBeautyProfile());
+            } else {
+                beautyProfile.setText("Beauty profile not set");
+            }
             review.setText(String.valueOf(model.getReview()));
 
         }
