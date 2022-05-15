@@ -29,6 +29,7 @@
             android:id="@+id/dismissBtn"
             android:layout_width="35dp"
             android:layout_height="35sp"
+            android:elevation="3dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_baseline_clear_24"
@@ -171,7 +172,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Phone\nNumber"
+                    android:text="Personal\nInfo"
                     android:textAlignment="center"
                     android:textColor="@color/pink"
                     android:textSize="12sp"
@@ -297,6 +298,16 @@
             app:riv_border_width="3dp"
             app:riv_corner_radius="100dp" />
 
+
+        <ImageView
+            android:id="@+id/imageHint"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            app:tint="@color/pink"
+            android:src="@drawable/ic_photo_camera_black_48dp"
+            app:layout_constraintBottom_toBottomOf="@+id/image"
+            app:layout_constraintEnd_toEndOf="@+id/image" />
+
         <EditText
             android:id="@+id/fullName"
             android:layout_width="match_parent"
@@ -385,6 +396,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="30dp"
             android:padding="10dp"
+            android:visibility="gone"
             android:text="SKIP"
             android:textColor="@color/pink"
             android:textStyle="bold"

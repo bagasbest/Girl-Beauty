@@ -93,12 +93,48 @@ public class ProductVIewModel extends ViewModel {
         }
     }
 
+    public void setProductListByUid(String uid) {
+        productModelArrayList.clear();
+
+        try {
+            FirebaseFirestore
+                    .getInstance()
+                    .collection("product")
+                    .whereEqualTo("userId", uid)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if(task.isSuccessful()) {
+                            for(QueryDocumentSnapshot document : task.getResult()) {
+                                ProductModel model = new ProductModel();
+
+                                model.setUid("" + document.get("uid"));
+                                model.setUserId("" + document.get("userId"));
+                                model.setName("" + document.get("name"));
+                                model.setDescription("" + document.get("description"));
+                                model.setImage("" + document.get("image"));
+                                model.setAvailableIn("" + document.get("availableIn"));
+                                model.setPrice(document.getLong("price"));
+                                model.setUserRecommended(document.getLong("userRecommended"));
+                                model.setRating(document.getDouble("rating"));
+                                model.setUserReview(document.getLong("userReview"));
+
+
+                                productModelArrayList.add(model);
+                            }
+                            listProduct.postValue(productModelArrayList);
+                        } else {
+                            Log.e(TAG, task.toString());
+                        }
+                    });
+        } catch (Exception error) {
+            error.printStackTrace();
+        }
+    }
+
 
     public LiveData<ArrayList<ProductModel>> getProduct() {
         return listProduct;
     }
-
-
 
 
 

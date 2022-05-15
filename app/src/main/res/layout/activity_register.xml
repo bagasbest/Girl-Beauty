@@ -310,7 +310,7 @@
             android:id="@+id/dob"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Date of birth (Jakarta, 1 - 01 - 2000"
+            android:hint="Date of birth (Jakarta, 01 - 01 - 2000)"
             android:layout_marginTop="16dp"
             android:inputType="textCapWords"
             android:layout_marginStart="16dp"

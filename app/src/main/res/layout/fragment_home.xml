@@ -34,27 +34,112 @@
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_baseline_search_24"
             app:layout_constraintBottom_toBottomOf="@+id/textView18"
+            app:layout_constraintEnd_toStartOf="@+id/notification"
+            app:layout_constraintTop_toTopOf="@+id/textView18" />
+
+        <ImageView
+            android:id="@+id/notification"
+            android:layout_width="35dp"
+            android:layout_height="35sp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_baseline_notifications_none_24"
+            app:layout_constraintBottom_toBottomOf="@+id/textView18"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView18" />
 
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView18">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="20sp"
+                    android:layout_height="20sp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_baseline_category_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/pink" />
+
+                <TextView
+                    android:id="@+id/textView30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="CATEGORY"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/imageView8"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="|"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView9"
+                    android:layout_width="20sp"
+                    android:layout_height="20sp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_baseline_discount_24"
+                    app:layout_constraintEnd_toStartOf="@+id/textView31"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/pink" />
+
+                <TextView
+                    android:id="@+id/textView31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20sp"
+                    android:text="BRAND"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
         <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
+            android:layout_marginTop="16dp"
             android:layout_height="250dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:contentDescription="@string/image"
+            android:elevation="10dp"
             app:iss_auto_cycle="true"
             app:iss_corner_radius="16"
-            android:layout_marginTop="16dp"
-            android:elevation="10dp"
             app:iss_delay="0"
             app:iss_error_image="@drawable/loading"
             app:iss_period="4000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
 
         <TextView

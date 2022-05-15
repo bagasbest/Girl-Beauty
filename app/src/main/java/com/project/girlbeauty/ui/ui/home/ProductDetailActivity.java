@@ -40,6 +40,8 @@ import com.project.girlbeauty.utils.ReviewAdapter;
 import com.project.girlbeauty.utils.ReviewModel;
 import com.project.girlbeauty.utils.ReviewViewModel;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -55,6 +57,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     private boolean isRecommended = false;
     private int totalUser;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +83,8 @@ public class ProductDetailActivity extends AppCompatActivity {
 
             binding.name.setText(model.getName());
             binding.description.setText(model.getDescription());
-
+            NumberFormat formatter = new DecimalFormat("#,###");
+            binding.price.setText("Rp."+ formatter.format(model.getPrice()));
 
             String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
             SharedPreferences prefs = getSharedPreferences("MySharedPref", MODE_PRIVATE);

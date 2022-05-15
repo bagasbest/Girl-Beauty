@@ -46,8 +46,6 @@ public class AddFragment extends Fragment {
         binding = FragmentAddBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        mProgressDialog = new ProgressDialog(getActivity());
-
         checkLogin();
 
         return root;
@@ -171,7 +169,6 @@ public class AddFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            mProgressDialog.dismiss();
             if (requestCode == REQUEST_FROM_GALLERY) {
                 uploadDp(data.getData(), "image");
             } else if (requestCode == REQUEST_FROM_AVAILABLE_IN){
@@ -185,6 +182,7 @@ public class AddFragment extends Fragment {
     /// fungsi untuk mengupload foto kedalam cloud storage
     private void uploadDp(Uri data, String option) {
         StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+        mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setMessage("Uploading process...");
         mProgressDialog.setCanceledOnTouchOutside(false);
         mProgressDialog.show();
