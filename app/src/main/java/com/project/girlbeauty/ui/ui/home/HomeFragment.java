@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,7 +98,6 @@ public class HomeFragment extends Fragment {
         dialog.setContentView(R.layout.popup_account_status);
         dialog.setCanceledOnTouchOutside(false);
 
-
         completeProfileBtn = dialog.findViewById(R.id.completeProfileBtn);
         cancel = dialog.findViewById(R.id.cancel);
         pic = dialog.findViewById(R.id.personalInfoCheck);
@@ -108,11 +108,11 @@ public class HomeFragment extends Fragment {
         if (status.equals("beautyProfile")) {
             piw.setVisibility(View.GONE);
             pic.setVisibility(View.VISIBLE);
-        } else {
+        } else if (status.equals("beautyConcern")){
             piw.setVisibility(View.GONE);
             pic.setVisibility(View.VISIBLE);
-            bpc.setVisibility(View.GONE);
-            bpw.setVisibility(View.VISIBLE);
+            bpw.setVisibility(View.GONE);
+            bpc.setVisibility(View.VISIBLE);
         }
 
         completeProfileBtn.setOnClickListener(view -> {

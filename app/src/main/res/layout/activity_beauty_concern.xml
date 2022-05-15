@@ -27,6 +27,7 @@
             android:id="@+id/dismissBtn"
             android:layout_width="35dp"
             android:layout_height="35sp"
+            android:elevation="3dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_baseline_clear_24"
