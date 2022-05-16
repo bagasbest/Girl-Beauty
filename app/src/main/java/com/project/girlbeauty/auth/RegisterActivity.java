@@ -44,7 +44,9 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         binding.imageView.setOnClickListener(view -> {
-            countDownTimer.cancel();
+            if (phone != null) {
+                countDownTimer.cancel();
+            }
             onBackPressed();
         });
 
@@ -78,7 +80,6 @@ public class RegisterActivity extends AppCompatActivity {
         binding.verifyBtn.setOnClickListener(view -> formValidationOTP());
 
         binding.countdownTimer.setOnClickListener(view -> {
-            Log.e("taf", phone);
             sendOTP();
             countdownTimer();
         });
@@ -380,8 +381,11 @@ public class RegisterActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            countDownTimer.cancel();
+            if (phone != null) {
+                countDownTimer.cancel();
+            }
             onBackPressed();
+
             return true;
         }
         return false;

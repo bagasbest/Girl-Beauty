@@ -22,9 +22,9 @@ import java.util.Set;
 public class BeautyConcernActivity extends AppCompatActivity {
 
     private ActivityBeautyConcernBinding binding;
-    private Set<String> skinConcern = new HashSet<>();
-    private Set<String> bodyConcern = new HashSet<>();
-    private Set<String> hairConcern = new HashSet<>();
+    private final Set<String> skinConcern = new HashSet<>();
+    private final Set<String> bodyConcern = new HashSet<>();
+    private final Set<String> hairConcern = new HashSet<>();
     private boolean isOnDehydrated = false;
     private boolean isOnAcne = false;
     private boolean isOnWrinkles = false;

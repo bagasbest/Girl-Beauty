@@ -37,19 +37,15 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        initRecyclerView();
-        initViewModel();
+        checkLogin();
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentProfileBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
-        checkLogin();
-
-        return root;
+        return binding.getRoot();
     }
 
     private void initRecyclerView() {
@@ -76,6 +72,9 @@ public class ProfileFragment extends Fragment {
 
     private void checkLogin() {
         if(FirebaseAuth.getInstance().getCurrentUser() != null) {
+            initRecyclerView();
+            initViewModel();
+
             binding.noLogin.setVisibility(View.GONE);
             binding.content.setVisibility(View.VISIBLE);
 
@@ -126,9 +125,6 @@ public class ProfileFragment extends Fragment {
                                String words = "";
                                for(int i = 0; i<skinConcern.size(); i++) {
                                    words = skinConcern.get(i);
-                                   if(i+1 < skinConcern.size()) {
-                                       words = words + (", ");
-                                   }
 
                                    TextView valueTV = new TextView(getActivity());
                                    valueTV.setText(words);
@@ -150,11 +146,6 @@ public class ProfileFragment extends Fragment {
                                 String words = "";
                                 for(int i = 0; i<bodyConcern.size(); i++) {
                                     words = bodyConcern.get(i);
-                                    if(i+1 < bodyConcern.size()) {
-                                        words = words + (", ");
-                                    }
-
-
 
                                     TextView valueTV = new TextView(getActivity());
                                     valueTV.setText(words);
@@ -174,10 +165,6 @@ public class ProfileFragment extends Fragment {
                                 String words = "";
                                 for(int i = 0; i<hairConcern.size(); i++) {
                                     words = hairConcern.get(i);
-                                    if(i+1 < hairConcern.size()) {
-                                        words = words + (", ");
-                                    }
-
 
                                     TextView valueTV = new TextView(getActivity());
                                     valueTV.setText(words);

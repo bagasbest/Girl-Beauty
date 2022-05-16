@@ -52,8 +52,10 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView image;
-        private TextView name, review, beautyProfile;
+        private final ImageView image;
+        private final TextView name;
+        private final TextView review;
+        private final TextView beautyProfile;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);

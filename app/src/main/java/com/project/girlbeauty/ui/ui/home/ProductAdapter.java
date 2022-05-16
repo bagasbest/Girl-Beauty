@@ -54,9 +54,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     //// FUNGSI UNTUK MEMASUKKAN DATA DARI ARRAY LIST DIATAS KEDALAM ATRIBUT, SEHINGGA TERLIHAT NAMA, DESKRIPSI, RATING
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private CardView cv;
-        private ImageView image;
-        private TextView name, description, rating, userReview;
+        private final CardView cv;
+        private final ImageView image;
+        private final TextView name;
+        private final TextView description;
+        private final TextView rating;
+        private final TextView userReview;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);

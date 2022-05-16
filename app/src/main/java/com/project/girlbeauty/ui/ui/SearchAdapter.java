@@ -57,9 +57,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     //// FUNGSI UNTUK MEMASUKKAN DATA DARI ARRAY LIST DIATAS KEDALAM ATRIBUT, SEHINGGA TERLIHAT NAMA, DESKRIPSI, RATING
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ConstraintLayout cv;
-        private ImageView image;
-        private TextView name, description, rating, userReview;
+        private final ConstraintLayout cv;
+        private final ImageView image;
+        private final TextView name;
+        private final TextView description;
+        private final TextView rating;
+        private final TextView userReview;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
