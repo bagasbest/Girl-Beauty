@@ -85,6 +85,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             binding.description.setText(model.getDescription());
             NumberFormat formatter = new DecimalFormat("#,###");
             binding.price.setText("Rp."+ formatter.format(model.getPrice()));
+            binding.userReview.setText(model.getUserReview() + " users\nReview this");
 
             String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
             SharedPreferences prefs = getSharedPreferences("MySharedPref", MODE_PRIVATE);

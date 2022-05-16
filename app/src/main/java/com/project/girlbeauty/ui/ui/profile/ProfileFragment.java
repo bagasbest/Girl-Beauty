@@ -1,10 +1,13 @@
 package com.project.girlbeauty.ui.ui.profile;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,13 +16,18 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.project.girlbeauty.MainActivity;
 import com.project.girlbeauty.R;
-import com.project.girlbeauty.auth.LoginActivity;
 import com.project.girlbeauty.databinding.FragmentProfileBinding;
 import com.project.girlbeauty.ui.ui.home.ProductAdapter;
 import com.project.girlbeauty.ui.ui.home.ProductVIewModel;
+
+import java.util.ArrayList;
 
 public class ProfileFragment extends Fragment {
 
@@ -70,6 +78,123 @@ public class ProfileFragment extends Fragment {
         if(FirebaseAuth.getInstance().getCurrentUser() != null) {
             binding.noLogin.setVisibility(View.GONE);
             binding.content.setVisibility(View.VISIBLE);
+
+            /// get user data
+            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            FirebaseFirestore
+                    .getInstance()
+                    .collection("users")
+                    .document(uid)
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @SuppressLint({"SetTextI18n", "ResourceType", "UseCompatLoadingForDrawables"})
+                        @Override
+                        public void onSuccess(DocumentSnapshot it) {
+
+                            String image = "" + it.get("image");
+                            String fullName = "" + it.get("fullName");
+                            String username = "" + it.get("username");
+                            String email = "" + it.get("email");
+                            String skinType = "" + it.get("skinType");
+                            String skinTone = "" + it.get("skinTone");
+                            String skinUnderTone = "" + it.get("skinUnderTone");
+                            String hairType = "" + it.get("hairType");
+                            String coloredHair = "" + it.get("coloredHair");
+                            String hijabers = "" + it.get("hijabers");
+
+                            ArrayList<String> skinConcern = (ArrayList<String>) it.get("skinConcern");
+                            ArrayList<String> bodyConcern = (ArrayList<String>) it.get("bodyConcern");
+                            ArrayList<String> hairConcern = (ArrayList<String>) it.get("hairConcern");
+
+                            if(!image.equals("")) {
+                                Glide.with(requireContext())
+                                        .load("" + it.get("image"))
+                                        .into(binding.image);
+                            }
+
+                            binding.fullName.setText("" + fullName);
+                            binding.username.setText("" + username);
+                            binding.email.setText("" + email);
+                            binding.skinType.setText("Skin type: " + skinType);
+                            binding.skinTone.setText("Skin tone: " + skinTone);
+                            binding.skinUnderTone.setText("Skin undertone:" + skinUnderTone);
+                            binding.hairType.setText("Hair type: " + hairType);
+                            binding.coloredHair.setText("Colored Hair: " + coloredHair);
+                            binding.hijabers.setText("Hijaber: " + hijabers);
+
+                           if(skinConcern != null) {
+                               String words = "";
+                               for(int i = 0; i<skinConcern.size(); i++) {
+                                   words = skinConcern.get(i);
+                                   if(i+1 < skinConcern.size()) {
+                                       words = words + (", ");
+                                   }
+
+                                   TextView valueTV = new TextView(getActivity());
+                                   valueTV.setText(words);
+                                   valueTV.setId(i);
+                                   valueTV.setTextColor(getResources().getColor(R.color.white));
+                                   valueTV.setBackground(getResources().getDrawable(R.drawable.bg_rounded_btn));
+                                   valueTV.setPadding(10, 5, 10, 5);
+
+                                   LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                                   params.setMarginStart(16);
+                                   valueTV.setLayoutParams(params);
+                                   ((LinearLayout) binding.ll1).addView(valueTV);
+
+                               }
+                           }
+
+
+                            if(bodyConcern != null) {
+                                String words = "";
+                                for(int i = 0; i<bodyConcern.size(); i++) {
+                                    words = bodyConcern.get(i);
+                                    if(i+1 < bodyConcern.size()) {
+                                        words = words + (", ");
+                                    }
+
+
+
+                                    TextView valueTV = new TextView(getActivity());
+                                    valueTV.setText(words);
+                                    valueTV.setId(i);
+                                    valueTV.setTextColor(getResources().getColor(R.color.white));
+                                    valueTV.setBackground(getResources().getDrawable(R.drawable.bg_rounded_btn));
+                                    valueTV.setPadding(10, 5, 10, 5);
+                                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                                    params.setMarginStart(16);
+                                    valueTV.setLayoutParams(params);
+                                    ((LinearLayout) binding.ll2).addView(valueTV);
+
+                                }
+                            }
+
+                            if(hairConcern != null) {
+                                String words = "";
+                                for(int i = 0; i<hairConcern.size(); i++) {
+                                    words = hairConcern.get(i);
+                                    if(i+1 < hairConcern.size()) {
+                                        words = words + (", ");
+                                    }
+
+
+                                    TextView valueTV = new TextView(getActivity());
+                                    valueTV.setText(words);
+                                    valueTV.setId(i);
+                                    valueTV.setTextColor(getResources().getColor(R.color.white));
+                                    valueTV.setBackground(getResources().getDrawable(R.drawable.bg_rounded_btn));
+                                    valueTV.setPadding(10, 5, 10, 5);
+                                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                                    params.setMarginStart(16);
+                                    valueTV.setLayoutParams(params);
+                                    ((LinearLayout) binding.ll3).addView(valueTV);
+
+                                }
+                            }
+
+                        }
+                    });
         }
     }
 

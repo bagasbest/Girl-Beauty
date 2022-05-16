@@ -13,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.project.girlbeauty.R;
 import com.project.girlbeauty.databinding.ActivityBeautyConcernBinding;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -577,11 +578,16 @@ public class BeautyConcernActivity extends AppCompatActivity {
             binding.progressBar.setVisibility(View.VISIBLE);
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+            ArrayList<String> newBodyConcern = new ArrayList<>(bodyConcern);
+            ArrayList<String> newHairConcern = new ArrayList<>(hairConcern);
+            ArrayList<String> newSkinConcern = new ArrayList<>(skinConcern);
+
+
             // SIMPAN DATA PERALATAN KAMERA KE DATABASE
             Map<String, Object> product = new HashMap<>();
-            product.put("skinConcern", skinConcern);
-            product.put("bodyConcern", bodyConcern);
-            product.put("hairConcern", hairConcern);
+            product.put("skinConcern", newBodyConcern);
+            product.put("bodyConcern", newHairConcern);
+            product.put("hairConcern", newSkinConcern);
 
 
             FirebaseFirestore

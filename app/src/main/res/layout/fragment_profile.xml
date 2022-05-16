@@ -10,7 +10,7 @@
     <ScrollView
         android:id="@+id/content"
         android:layout_width="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,8 +47,8 @@
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/image"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="30dp"
                 android:src="@drawable/ic_baseline_tag_faces_24_2"
                 app:layout_constraintStart_toStartOf="@+id/textView18"
@@ -66,7 +66,7 @@
                 android:layout_marginEnd="16sp"
                 android:text="Fullname"
                 android:textColor="@color/pink"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/image"
@@ -139,7 +139,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Skin type: "
-                    android:textColor="@color/black" />
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/skinTone"
@@ -147,7 +148,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="Skin tone: "
-                    android:textColor="@color/black" />
+                    android:textStyle="bold"/>
 
 
                 <TextView
@@ -156,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="Skin undertone: "
-                    android:textColor="@color/black" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/hairType"
@@ -164,7 +165,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="Hair type: "
-                    android:textColor="@color/black" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/coloredHair"
@@ -172,15 +173,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="Colored hair: "
-                    android:textColor="@color/black" />
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/Hijabers"
+                    android:id="@+id/hijabers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="Hijabers: "
-                    android:textColor="@color/black" />
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -221,29 +222,58 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView20">
 
                 <TextView
-                    android:id="@+id/skinConcern"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Skin concern: "
-                    android:textColor="@color/black" />
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/ll1"
+                    android:orientation="horizontal">
+
+
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/bodyConcern"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="Body concern: "
-                    android:textColor="@color/black" />
+                    android:textStyle="bold" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/ll2"
+                    android:orientation="horizontal">
+
+
+                </LinearLayout>
+
 
 
                 <TextView
-                    android:id="@+id/hairConcern"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="Hair concern: "
-                    android:textColor="@color/black" />
+                    android:textStyle="bold" />
 
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/ll3"
+                    android:orientation="horizontal">
+
+
+                </LinearLayout>
 
             </LinearLayout>
 
