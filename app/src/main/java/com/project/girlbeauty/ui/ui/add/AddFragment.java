@@ -19,7 +19,9 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -39,6 +41,9 @@ public class AddFragment extends Fragment {
     private static final int REQUEST_FROM_GALLERY = 1001;
     private static final int REQUEST_FROM_AVAILABLE_IN = 1002;
     private ProgressDialog mProgressDialog;
+    private String role;
+    private String username;
+    private String userDp;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -55,7 +60,25 @@ public class AddFragment extends Fragment {
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             binding.noLogin.setVisibility(View.GONE);
             binding.content.setVisibility(View.VISIBLE);
+            checkRole();
         }
+    }
+
+    private void checkRole() {
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseFirestore
+                .getInstance()
+                .collection("users")
+                .document(uid)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        role = "" + documentSnapshot.get("role");
+                        username = "" + documentSnapshot.get("username");
+                        userDp = "" + documentSnapshot.get("image");
+                    }
+                });
     }
 
     @Override
@@ -107,6 +130,14 @@ public class AddFragment extends Fragment {
             // SIMPAN DATA PERALATAN KAMERA KE DATABASE
             Map<String, Object> product = new HashMap<>();
             product.put("name", name);
+            if(role.equals("user")) {
+                product.put("username", username);
+                product.put("userDp", userDp);
+            } else {
+                product.put("username", "");
+                product.put("userDp", "");
+            }
+            product.put("role", role);
             product.put("nameTemp", name.toLowerCase());
             product.put("description", description);
             product.put("image", dp);

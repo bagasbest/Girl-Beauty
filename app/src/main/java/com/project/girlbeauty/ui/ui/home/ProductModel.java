@@ -6,6 +6,9 @@ import android.os.Parcelable;
 public class ProductModel implements Parcelable {
 
     private String name;
+    private String username;
+    private String userDp;
+    private String role;
     private String uid;
     private String description;
     private Long price;
@@ -16,10 +19,14 @@ public class ProductModel implements Parcelable {
     private String userId;
     private String availableIn;
 
-   public ProductModel(){}
+    public ProductModel() {
+    }
 
     protected ProductModel(Parcel in) {
         name = in.readString();
+        username = in.readString();
+        userDp = in.readString();
+        role = in.readString();
         uid = in.readString();
         description = in.readString();
         if (in.readByte() == 0) {
@@ -46,6 +53,9 @@ public class ProductModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
+        dest.writeString(username);
+        dest.writeString(userDp);
+        dest.writeString(role);
         dest.writeString(uid);
         dest.writeString(description);
         if (price == null) {
@@ -95,6 +105,30 @@ public class ProductModel implements Parcelable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUserDp() {
+        return userDp;
+    }
+
+    public void setUserDp(String userDp) {
+        this.userDp = userDp;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getUid() {

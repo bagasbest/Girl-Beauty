@@ -80,6 +80,18 @@ public class ProductDetailActivity extends AppCompatActivity {
                     .load(model.getAvailableIn())
                     .into(binding.availableOnImage);
 
+            if(model.getRole().equals("user")) {
+                if(!model.getUserDp().equals(""))  {
+                    Glide.with(this)
+                            .load(model.getUserDp())
+                            .into(binding.userDp);
+                }
+                binding.username.setText(model.getUsername());
+            } else {
+                binding.userDp.setVisibility(View.GONE);
+                binding.username.setVisibility(View.GONE);
+                binding.textView29.setVisibility(View.GONE);
+            }
 
             binding.name.setText(model.getName());
             binding.description.setText(model.getDescription());

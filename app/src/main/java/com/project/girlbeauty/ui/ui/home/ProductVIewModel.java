@@ -34,8 +34,11 @@ public class ProductVIewModel extends ViewModel {
                                 model.setUid("" + document.get("uid"));
                                 model.setUserId("" + document.get("userId"));
                                 model.setName("" + document.get("name"));
+                                model.setRole("" + document.get("role"));
                                 model.setDescription("" + document.get("description"));
                                 model.setImage("" + document.get("image"));
+                                model.setUsername("" + document.get("username"));
+                                model.setUserDp("" + document.get("userDp"));
                                 model.setAvailableIn("" + document.get("availableIn"));
                                 model.setPrice(document.getLong("price"));
                                 model.setUserRecommended(document.getLong("userRecommended"));
@@ -73,6 +76,9 @@ public class ProductVIewModel extends ViewModel {
                                 model.setUid("" + document.get("uid"));
                                 model.setUserId("" + document.get("userId"));
                                 model.setName("" + document.get("name"));
+                                model.setRole("" + document.get("role"));
+                                model.setUsername("" + document.get("username"));
+                                model.setUserDp("" + document.get("userDp"));
                                 model.setDescription("" + document.get("description"));
                                 model.setPrice(document.getLong("price"));
                                 model.setImage("" + document.get("image"));
@@ -109,6 +115,10 @@ public class ProductVIewModel extends ViewModel {
 
                                 model.setUid("" + document.get("uid"));
                                 model.setUserId("" + document.get("userId"));
+                                model.setName("" + document.get("name"));
+                                model.setRole("" + document.get("role"));
+                                model.setUsername("" + document.get("username"));
+                                model.setUserDp("" + document.get("userDp"));
                                 model.setName("" + document.get("name"));
                                 model.setDescription("" + document.get("description"));
                                 model.setImage("" + document.get("image"));

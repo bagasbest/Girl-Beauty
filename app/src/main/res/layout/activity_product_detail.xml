@@ -10,7 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -118,6 +118,41 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description" />
 
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Uploaded By:"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/price"
+                app:layout_constraintTop_toBottomOf="@+id/price" />
+
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/userDp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_baseline_tag_faces_24_2"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toBottomOf="@+id/textView29"
+                app:riv_corner_radius="100dp" />
+
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Name"
+                android:textColor="@color/black"
+                android:layout_marginStart="16dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/userDp"
+                app:layout_constraintStart_toEndOf="@+id/userDp"
+                app:layout_constraintTop_toTopOf="@+id/userDp" />
+
             <View
                 android:id="@+id/view12"
                 android:layout_width="match_parent"
@@ -126,7 +161,7 @@
                 android:background="#EAEAEA"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/price" />
+                app:layout_constraintTop_toBottomOf="@+id/userDp" />
 
 
             <TextView
