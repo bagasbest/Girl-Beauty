@@ -1,4 +1,4 @@
-package com.project.girlbeauty.ui;
+package com.beauty.girlbeauty.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,8 +10,8 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.project.girlbeauty.R;
-import com.project.girlbeauty.databinding.ActivityBeautyConcernBinding;
+import com.beauty.girlbeauty.R;
+import com.beauty.girlbeauty.databinding.ActivityBeautyConcernBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;

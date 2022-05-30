@@ -1,4 +1,4 @@
-package com.project.girlbeauty.ui;
+package com.beauty.girlbeauty.ui;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,8 +6,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import com.project.girlbeauty.R;
-import com.project.girlbeauty.databinding.ActivityHomepageBinding;
+import com.beauty.girlbeauty.R;
+import com.beauty.girlbeauty.databinding.ActivityHomepageBinding;
 
 public class HomepageActivity extends AppCompatActivity {
 

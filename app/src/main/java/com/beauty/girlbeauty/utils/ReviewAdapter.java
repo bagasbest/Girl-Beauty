@@ -1,4 +1,4 @@
-package com.project.girlbeauty.utils;
+package com.beauty.girlbeauty.utils;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.project.girlbeauty.R;
+import com.beauty.girlbeauty.R;
 
 import org.jetbrains.annotations.NotNull;
 

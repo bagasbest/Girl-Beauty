@@ -1,4 +1,4 @@
-package com.project.girlbeauty.ui.ui;
+package com.beauty.girlbeauty.ui.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -9,9 +9,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
-import com.project.girlbeauty.databinding.ActivitySearchBinding;
-import com.project.girlbeauty.ui.ui.home.ProductAdapter;
-import com.project.girlbeauty.ui.ui.home.ProductVIewModel;
+import com.beauty.girlbeauty.databinding.ActivitySearchBinding;
+import com.beauty.girlbeauty.ui.ui.home.ProductAdapter;
+import com.beauty.girlbeauty.ui.ui.home.ProductVIewModel;
 
 public class SearchActivity extends AppCompatActivity {
 

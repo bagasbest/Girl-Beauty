@@ -1,4 +1,4 @@
-package com.project.girlbeauty;
+package com.beauty.girlbeauty;
 
 import android.content.Context;
 

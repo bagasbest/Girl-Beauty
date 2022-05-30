@@ -1,4 +1,4 @@
-package com.project.girlbeauty.ui.ui;
+package com.beauty.girlbeauty.ui.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -14,9 +14,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.project.girlbeauty.R;
-import com.project.girlbeauty.ui.ui.home.ProductDetailActivity;
-import com.project.girlbeauty.ui.ui.home.ProductModel;
+import com.beauty.girlbeauty.R;
+import com.beauty.girlbeauty.ui.ui.home.ProductDetailActivity;
+import com.beauty.girlbeauty.ui.ui.home.ProductModel;
 
 import org.jetbrains.annotations.NotNull;
 

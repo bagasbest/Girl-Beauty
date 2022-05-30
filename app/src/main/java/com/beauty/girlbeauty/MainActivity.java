@@ -1,4 +1,4 @@
-package com.project.girlbeauty;
+package com.beauty.girlbeauty;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.project.girlbeauty.auth.LoginActivity;
-import com.project.girlbeauty.auth.RegisterActivity;
-import com.project.girlbeauty.databinding.ActivityMainBinding;
+import com.beauty.girlbeauty.auth.LoginActivity;
+import com.beauty.girlbeauty.auth.RegisterActivity;
+import com.beauty.girlbeauty.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 

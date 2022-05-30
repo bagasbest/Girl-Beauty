@@ -1,4 +1,4 @@
-package com.project.girlbeauty.ui.ui.add;
+package com.beauty.girlbeauty.ui.ui.add;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -25,9 +25,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.project.girlbeauty.MainActivity;
-import com.project.girlbeauty.R;
-import com.project.girlbeauty.databinding.FragmentAddBinding;
+import com.beauty.girlbeauty.MainActivity;
+import com.beauty.girlbeauty.R;
+import com.beauty.girlbeauty.databinding.FragmentAddBinding;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;

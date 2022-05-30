@@ -1,4 +1,4 @@
-package com.project.girlbeauty.auth;
+package com.beauty.girlbeauty.auth;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
-import com.project.girlbeauty.R;
-import com.project.girlbeauty.databinding.ActivityLoginBinding;
-import com.project.girlbeauty.ui.HomepageActivity;
+import com.beauty.girlbeauty.R;
+import com.beauty.girlbeauty.databinding.ActivityLoginBinding;
+import com.beauty.girlbeauty.ui.HomepageActivity;
 
 public class LoginActivity extends AppCompatActivity {
 

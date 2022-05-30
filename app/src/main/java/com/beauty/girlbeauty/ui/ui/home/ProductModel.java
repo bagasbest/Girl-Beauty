@@ -1,4 +1,4 @@
-package com.project.girlbeauty.ui.ui.home;
+package com.beauty.girlbeauty.ui.ui.home;
 
 import android.os.Parcel;
 import android.os.Parcelable;

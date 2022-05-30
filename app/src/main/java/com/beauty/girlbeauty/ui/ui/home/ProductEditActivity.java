@@ -1,4 +1,4 @@
-package com.project.girlbeauty.ui;
+package com.beauty.girlbeauty.ui.ui.home;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,32 +12,59 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.project.girlbeauty.R;
-import com.project.girlbeauty.databinding.ActivityPersonalInfoBinding;
+import com.beauty.girlbeauty.MainActivity;
+import com.beauty.girlbeauty.R;
+import com.beauty.girlbeauty.databinding.ActivityProductEditBinding;
+import com.beauty.girlbeauty.ui.HomepageActivity;
+import com.beauty.girlbeauty.ui.ui.add.AddFragment;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-public class PersonalInfoActivity extends AppCompatActivity {
+public class ProductEditActivity extends AppCompatActivity {
 
-
-    private ActivityPersonalInfoBinding binding;
+    public static final String EXTRA_DATA = "data";
+    private ActivityProductEditBinding binding;
+    private ProductModel model;
     private String dp;
+    private String availableIn;
     private static final int REQUEST_FROM_GALLERY = 1001;
+    private static final int REQUEST_FROM_AVAILABLE_IN = 1002;
     private ProgressDialog mProgressDialog;
-    private String gender;
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityPersonalInfoBinding.inflate(getLayoutInflater());
+        binding = ActivityProductEditBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.dismissBtn.setOnClickListener(new View.OnClickListener() {
+        model = getIntent().getParcelableExtra(EXTRA_DATA);
+
+        dp = model.getImage();
+        availableIn = model.getAvailableIn();
+
+        Glide.with(this)
+                .load(dp)
+                .into(binding.image);
+
+        Glide.with(this)
+                .load(availableIn)
+                .into(binding.availableOnImage);
+
+        binding.productName.setText(model.getName());
+        binding.productDescription.setText(model.getDescription());
+        binding.productPrice.setText("" + model.getPrice());
+
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
@@ -52,52 +79,47 @@ public class PersonalInfoActivity extends AppCompatActivity {
                     .start(REQUEST_FROM_GALLERY);
         });
 
-        binding.radioGroup.setOnCheckedChangeListener((radioGroup, id) -> {
-            switch (id) {
-                case R.id.male:
-                    gender = "Male";
-                    break;
-                case R.id.female:
-                    gender = "Female";
-                    break;
-            }
+        binding.availableOnImageHint.setOnClickListener(view13 -> {
+            ImagePicker.with(this)
+                    .galleryOnly()
+                    .compress(1024)
+                    .start(REQUEST_FROM_AVAILABLE_IN);
         });
 
         binding.saveBtn.setOnClickListener(view14 -> formValidation());
 
-        binding.skipBtn.setOnClickListener(view -> startActivity(new Intent(PersonalInfoActivity.this, BeautyProfileActivity.class)));
     }
 
     private void formValidation() {
-        String fullName = binding.fullName.getText().toString().trim();
-        String location = binding.location.getText().toString();
+        String name = binding.productName.getText().toString().trim();
+        String description = binding.productDescription.getText().toString().trim();
+        String price = binding.productPrice.getText().toString();
 
         /// ini merpakan validasi kolom inputan, semua kolom wajib diisi
-        if (fullName.isEmpty()) {
-            Toast.makeText(this, "Full Name must be filled!", Toast.LENGTH_SHORT).show();
-        } else if (dp == null) {
-            Toast.makeText(this, "User Image must be filled!", Toast.LENGTH_SHORT).show();
-        } else if (gender == null) {
-            Toast.makeText(this, "Gender must be filled!", Toast.LENGTH_SHORT).show();
-        } else if (location.isEmpty()) {
-            Toast.makeText(this, "Location must be filled!", Toast.LENGTH_SHORT).show();
+        if (name.isEmpty()) {
+            Toast.makeText(this, "Product name must be filled!", Toast.LENGTH_SHORT).show();
+        } else if (description.isEmpty()) {
+            Toast.makeText(this, "Product description must be filled!", Toast.LENGTH_SHORT).show();
+        } else if (price.isEmpty()) {
+            Toast.makeText(this, "Product price must be filled!", Toast.LENGTH_SHORT).show();
         }
         else {
             binding.progressBar.setVisibility(View.VISIBLE);
-            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
             // SIMPAN DATA PERALATAN KAMERA KE DATABASE
             Map<String, Object> product = new HashMap<>();
-            product.put("fullName", fullName);
-            product.put("gender", gender);
-            product.put("location", location);
+            product.put("name", name);
+            product.put("nameTemp", name.toLowerCase());
+            product.put("description", description);
             product.put("image", dp);
-
+            product.put("availableIn", availableIn);
+            product.put("price", Long.parseLong(price));
 
             FirebaseFirestore
                     .getInstance()
-                    .collection("users")
-                    .document(userId)
+                    .collection("product")
+                    .document(model.getUid())
                     .update(product)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
@@ -114,10 +136,10 @@ public class PersonalInfoActivity extends AppCompatActivity {
     /// tampilkan dialog box ketika gagal mengupload
     private void showFailureDialog() {
         new AlertDialog.Builder(this)
-                .setTitle("Failure Update Personal Info")
+                .setTitle("Failure Update Product")
                 .setMessage("Ups, your internet connection fail to register, please check your internet connection and try again later!")
                 .setIcon(R.drawable.ic_baseline_clear_24)
-                .setPositiveButton("OK", (dialogInterface, i) -> {
+                .setPositiveButton("OKE", (dialogInterface, i) -> {
                     dialogInterface.dismiss();
                 })
                 .show();
@@ -126,24 +148,30 @@ public class PersonalInfoActivity extends AppCompatActivity {
     /// tampilkan dialog box ketika sukses mengupload
     private void showSuccessDialog() {
         new AlertDialog.Builder(this)
-                .setTitle("Failure Update Personal Info")
-                .setMessage("Operation success")
+                .setTitle("Success Update Product")
+                .setMessage("Product will be released soon!")
                 .setIcon(R.drawable.ic_baseline_check_circle_outline_24)
-                .setPositiveButton("OK", (dialogInterface, i) -> {
+                .setPositiveButton("OKE", (dialogInterface, i) -> {
                     dialogInterface.dismiss();
-                    binding.skipBtn.setVisibility(View.VISIBLE);
+                    Intent intent = new Intent(this, HomepageActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    dialogInterface.dismiss();
+                    startActivity(intent);
+                    finish();
                 })
                 .show();
     }
-
 
     @SuppressLint("SetTextI18n")
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
+            mProgressDialog.dismiss();
             if (requestCode == REQUEST_FROM_GALLERY) {
-                uploadDp(data.getData());
+                uploadDp(data.getData(), "image");
+            } else if (requestCode == REQUEST_FROM_AVAILABLE_IN){
+                uploadDp(data.getData(), "available");
             }
         }
     }
@@ -151,24 +179,32 @@ public class PersonalInfoActivity extends AppCompatActivity {
 
 
     /// fungsi untuk mengupload foto kedalam cloud storage
-    private void uploadDp(Uri data) {
+    private void uploadDp(Uri data, String option) {
         StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Uploading process...");
         mProgressDialog.setCanceledOnTouchOutside(false);
         mProgressDialog.show();
-        String imageFileName = "users/data_" + System.currentTimeMillis() + ".png";
+        String imageFileName = option + "/data_" + System.currentTimeMillis() + ".png";
 
         mStorageRef.child(imageFileName).putFile(data)
                 .addOnSuccessListener(taskSnapshot ->
                         mStorageRef.child(imageFileName).getDownloadUrl()
                                 .addOnSuccessListener(uri -> {
                                     mProgressDialog.dismiss();
-                                    dp = uri.toString();
-                                    Glide
-                                            .with(this)
-                                            .load(dp)
-                                            .into(binding.image);
+                                    if (option.equals("image")) {
+                                        dp = uri.toString();
+                                        Glide
+                                                .with(this)
+                                                .load(dp)
+                                                .into(binding.image);
+                                    } else {
+                                        availableIn = uri.toString();
+                                        Glide
+                                                .with(this)
+                                                .load(availableIn)
+                                                .into(binding.availableOnImage);
+                                    }
                                 })
                                 .addOnFailureListener(e -> {
                                     mProgressDialog.dismiss();

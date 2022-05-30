@@ -1,4 +1,4 @@
-package com.project.girlbeauty.ui.ui.home;
+package com.beauty.girlbeauty.ui.ui.home;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.project.girlbeauty.R;
+import com.beauty.girlbeauty.R;
 
 import org.jetbrains.annotations.NotNull;
 

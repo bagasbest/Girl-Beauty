@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "345097159288",
-    "project_id": "girl-beauty-dccc6",
-    "storage_bucket": "girl-beauty-dccc6.appspot.com"
+    "project_number": "268715120894",
+    "project_id": "project-girlbeauty",
+    "storage_bucket": "project-girlbeauty.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:345097159288:android:d1d9e78863db10dc40238d",
+        "mobilesdk_app_id": "1:268715120894:android:927b8ce75db2cca08b6daf",
         "android_client_info": {
-          "package_name": "com.project.girlbeauty"
+          "package_name": "com.beauty.girlbeauty"
         }
       },
       "oauth_client": [
         {
-          "client_id": "345097159288-gtot5lji8k7e2940r41jg1ji9dtdk475.apps.googleusercontent.com",
+          "client_id": "268715120894-s49vg7a4cko5ptt7fdb77marrq5cuqfp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.beauty.girlbeauty",
+            "certificate_hash": "a16abcc749092fbbc99068eb523c8ad2f0bcf6ac"
+          }
+        },
+        {
+          "client_id": "268715120894-9g9a6e8pgoi3p491otsq1g617v61pec7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC-DkmRqLBRNSaEmJCvGkK6lvPKzO_jArw"
+          "current_key": "AIzaSyCTq5v-ffTccaYf4y7Z5wYaKvLsWOGNt7o"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "345097159288-gtot5lji8k7e2940r41jg1ji9dtdk475.apps.googleusercontent.com",
+              "client_id": "268715120894-9g9a6e8pgoi3p491otsq1g617v61pec7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

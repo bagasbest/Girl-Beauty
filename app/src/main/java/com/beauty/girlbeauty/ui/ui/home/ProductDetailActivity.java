@@ -1,4 +1,4 @@
-package com.project.girlbeauty.ui.ui.home;
+package com.beauty.girlbeauty.ui.ui.home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -33,12 +33,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.project.girlbeauty.MainActivity;
-import com.project.girlbeauty.R;
-import com.project.girlbeauty.databinding.ActivityProductDetailBinding;
-import com.project.girlbeauty.utils.ReviewAdapter;
-import com.project.girlbeauty.utils.ReviewModel;
-import com.project.girlbeauty.utils.ReviewViewModel;
+import com.beauty.girlbeauty.MainActivity;
+import com.beauty.girlbeauty.R;
+import com.beauty.girlbeauty.databinding.ActivityProductDetailBinding;
+import com.beauty.girlbeauty.utils.ReviewAdapter;
+import com.beauty.girlbeauty.utils.ReviewModel;
+import com.beauty.girlbeauty.utils.ReviewViewModel;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;

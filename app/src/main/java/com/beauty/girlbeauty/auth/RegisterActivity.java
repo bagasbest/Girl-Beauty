@@ -1,4 +1,4 @@
-package com.project.girlbeauty.auth;
+package com.beauty.girlbeauty.auth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -20,8 +20,8 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.project.girlbeauty.R;
-import com.project.girlbeauty.databinding.ActivityRegisterBinding;
+import com.beauty.girlbeauty.R;
+import com.beauty.girlbeauty.databinding.ActivityRegisterBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.project.girlbeauty.utils;
+package com.beauty.girlbeauty.utils;
 
 public class ReviewModel {
 

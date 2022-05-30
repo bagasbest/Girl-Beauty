@@ -1,4 +1,4 @@
-package com.project.girlbeauty.ui.ui.profile;
+package com.beauty.girlbeauty.ui.ui.profile;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -21,11 +21,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.project.girlbeauty.MainActivity;
-import com.project.girlbeauty.R;
-import com.project.girlbeauty.databinding.FragmentProfileBinding;
-import com.project.girlbeauty.ui.ui.home.ProductAdapter;
-import com.project.girlbeauty.ui.ui.home.ProductVIewModel;
+import com.beauty.girlbeauty.MainActivity;
+import com.beauty.girlbeauty.R;
+import com.beauty.girlbeauty.databinding.FragmentProfileBinding;
+import com.beauty.girlbeauty.ui.ui.home.ProductAdapter;
+import com.beauty.girlbeauty.ui.ui.home.ProductVIewModel;
 
 import java.util.ArrayList;
 
