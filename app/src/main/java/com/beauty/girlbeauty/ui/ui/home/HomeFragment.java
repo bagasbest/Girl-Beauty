@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
                             binding.textView18.setText("Hello, " + documentSnapshot.get("username"));
                             String role = "" + documentSnapshot.get("role");
 
-                            if(role.equals("user")) {
+                            if(role.equals("admin")) {
                                 binding.add.setVisibility(View.VISIBLE);
                             }
 
