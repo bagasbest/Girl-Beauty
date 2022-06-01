@@ -70,6 +70,11 @@ public class HomeFragment extends Fragment {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             binding.textView18.setText("Hello, " + documentSnapshot.get("username"));
+                            String role = "" + documentSnapshot.get("role");
+
+                            if(role.equals("user")) {
+                                binding.add.setVisibility(View.VISIBLE);
+                            }
 
                             String fullName = "" + documentSnapshot.get("fullName");
                             String skinType = "" + documentSnapshot.get("skinType");
@@ -174,6 +179,13 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         binding.search.setOnClickListener(view1 -> startActivity(new Intent(getActivity(), SearchActivity.class)));
+
+        binding.add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), ProductAddActivity.class));
+            }
+        });
     }
 
     @Override

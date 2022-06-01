@@ -64,7 +64,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         binding = ActivityProductDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        if(FirebaseAuth.getInstance().getCurrentUser() != null) {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             binding.noLogin.setVisibility(View.GONE);
             binding.content.setVisibility(View.VISIBLE);
 
@@ -72,6 +72,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             initRecyclerView();
             getRatingAndReview();
             getRecommendedUsers();
+            checkRole();
             Glide.with(this)
                     .load(model.getImage())
                     .into(binding.image);
@@ -80,23 +81,10 @@ public class ProductDetailActivity extends AppCompatActivity {
                     .load(model.getAvailableIn())
                     .into(binding.availableOnImage);
 
-            if(model.getRole().equals("user")) {
-                if(!model.getUserDp().equals(""))  {
-                    Glide.with(this)
-                            .load(model.getUserDp())
-                            .into(binding.userDp);
-                }
-                binding.username.setText(model.getUsername());
-            } else {
-                binding.userDp.setVisibility(View.GONE);
-                binding.username.setVisibility(View.GONE);
-                binding.textView29.setVisibility(View.GONE);
-            }
-
             binding.name.setText(model.getName());
             binding.description.setText(model.getDescription());
             NumberFormat formatter = new DecimalFormat("#,###");
-            binding.price.setText("Rp."+ formatter.format(model.getPrice()));
+            binding.price.setText("Rp." + formatter.format(model.getPrice()));
             binding.userReview.setText(model.getUserReview() + " users\nReview this");
 
             String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -107,11 +95,6 @@ public class ProductDetailActivity extends AppCompatActivity {
                 binding.recommendedBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_rounded_btn));
                 binding.recommendedBtn.setTextColor(ContextCompat.getColor(this, R.color.white));
                 isRecommended = true;
-            }
-
-            if(model.getUserId().equals(uid)) {
-                binding.edit.setVisibility(View.VISIBLE);
-                binding.delete.setVisibility(View.VISIBLE);
             }
 
             binding.backButton.setOnClickListener(view -> {
@@ -158,13 +141,34 @@ public class ProductDetailActivity extends AppCompatActivity {
         }
     }
 
+    private void checkRole() {
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseFirestore
+                .getInstance()
+                .collection("users")
+                .document(uid)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        String role = "" + documentSnapshot.get("role");
+                        if(role.equals("user")) {
+                            binding.addReviewBtn.setVisibility(View.VISIBLE);
+                        } else {
+                            binding.edit.setVisibility(View.VISIBLE);
+                            binding.delete.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+    }
+
     private void confirmDelete() {
         new AlertDialog.Builder(this)
                 .setTitle("Confirm Delete Product")
                 .setMessage("Are you sure want to delete this product ?")
                 .setIcon(R.drawable.ic_baseline_warning_24)
                 .setPositiveButton("YES", (dialogInterface, i) -> {
-                   deleteProduct();
+                    deleteProduct();
                 })
                 .setNegativeButton("NO", (dialog, i) -> {
                     dialog.dismiss();
@@ -181,8 +185,8 @@ public class ProductDetailActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()) {
-                           onBackPressed();
+                        if (task.isSuccessful()) {
+                            onBackPressed();
                             Toast.makeText(ProductDetailActivity.this, "Success delete this product!", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(ProductDetailActivity.this, "Failure delete this product!, please check internet connection and try again later!", Toast.LENGTH_SHORT).show();
@@ -219,11 +223,11 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
     private void updateRecommendedUser() {
-            FirebaseFirestore
-                    .getInstance()
-                    .collection("product")
-                    .document(model.getUid())
-                    .update("userRecommended", model.getUserRecommended());
+        FirebaseFirestore
+                .getInstance()
+                .collection("product")
+                .document(model.getUid())
+                .update("userRecommended", model.getUserRecommended());
     }
 
     private void showPopupReview() {
@@ -301,7 +305,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
 
                                         if (task.isSuccessful()) {
-                                            if(listReview.size() > 0) {
+                                            if (listReview.size() > 0) {
                                                 /// get new review on db
                                                 ReviewViewModel viewModel = new ViewModelProvider(ProductDetailActivity.this).get(ReviewViewModel.class);
                                                 viewModel.setListReview(model.getUid());
@@ -346,7 +350,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                                                                     }
                                                                 });
                                                     }
-                                                },1000);
+                                                }, 1000);
                                             } else {
                                                 Map<String, Object> data = new HashMap<>();
                                                 data.put("userReview", 1);

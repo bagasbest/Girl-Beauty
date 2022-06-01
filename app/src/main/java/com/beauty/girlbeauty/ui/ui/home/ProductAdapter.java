@@ -54,25 +54,21 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     //// FUNGSI UNTUK MEMASUKKAN DATA DARI ARRAY LIST DIATAS KEDALAM ATRIBUT, SEHINGGA TERLIHAT NAMA, DESKRIPSI, RATING
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final CardView cv, owner;
-        private final ImageView image, userDp;
+        private final CardView cv;
+        private final ImageView image;
         private final TextView name;
         private final TextView description;
         private final TextView rating;
         private final TextView userReview;
-        private final TextView username;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             cv = itemView.findViewById(R.id.cv);
-            owner = itemView.findViewById(R.id.owner);
             image = itemView.findViewById(R.id.image);
             name = itemView.findViewById(R.id.title);
             description = itemView.findViewById(R.id.description);
             rating = itemView.findViewById(R.id.rating);
             userReview = itemView.findViewById(R.id.userReview);
-            username = itemView.findViewById(R.id.username);
-            userDp = itemView.findViewById(R.id.userDp);
         }
 
         @SuppressLint({"DefaultLocale", "SetTextI18n"})
@@ -81,19 +77,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             Glide.with(itemView.getContext())
                     .load(model.getImage())
                     .into(image);
-
-            if(model.getRole().equals("user")) {
-                owner.setVisibility(View.VISIBLE);
-                if(!model.getUserDp().equals("")) {
-                    Glide.with(itemView.getContext())
-                            .load(model.getUserDp())
-                            .into(userDp);
-                }
-                username.setText(model.getUsername());
-            } else {
-                owner.setVisibility(View.GONE);
-            }
-
 
             name.setText(model.getName());
             description.setText(model.getDescription());

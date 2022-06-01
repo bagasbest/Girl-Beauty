@@ -6,9 +6,7 @@ import android.os.Parcelable;
 public class ProductModel implements Parcelable {
 
     private String name;
-    private String username;
-    private String userDp;
-    private String role;
+    private String nameTemp;
     private String uid;
     private String description;
     private Long price;
@@ -16,7 +14,6 @@ public class ProductModel implements Parcelable {
     private Long userRecommended;
     private double rating;
     private String image;
-    private String userId;
     private String availableIn;
 
     public ProductModel() {
@@ -24,9 +21,7 @@ public class ProductModel implements Parcelable {
 
     protected ProductModel(Parcel in) {
         name = in.readString();
-        username = in.readString();
-        userDp = in.readString();
-        role = in.readString();
+        nameTemp = in.readString();
         uid = in.readString();
         description = in.readString();
         if (in.readByte() == 0) {
@@ -46,16 +41,13 @@ public class ProductModel implements Parcelable {
         }
         rating = in.readDouble();
         image = in.readString();
-        userId = in.readString();
         availableIn = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
-        dest.writeString(username);
-        dest.writeString(userDp);
-        dest.writeString(role);
+        dest.writeString(nameTemp);
         dest.writeString(uid);
         dest.writeString(description);
         if (price == null) {
@@ -78,7 +70,6 @@ public class ProductModel implements Parcelable {
         }
         dest.writeDouble(rating);
         dest.writeString(image);
-        dest.writeString(userId);
         dest.writeString(availableIn);
     }
 
@@ -107,28 +98,12 @@ public class ProductModel implements Parcelable {
         this.name = name;
     }
 
-    public String getUsername() {
-        return username;
+    public String getNameTemp() {
+        return nameTemp;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getUserDp() {
-        return userDp;
-    }
-
-    public void setUserDp(String userDp) {
-        this.userDp = userDp;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+    public void setNameTemp(String nameTemp) {
+        this.nameTemp = nameTemp;
     }
 
     public String getUid() {
@@ -185,14 +160,6 @@ public class ProductModel implements Parcelable {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getAvailableIn() {

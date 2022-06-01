@@ -15,19 +15,15 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.github.dhaval2404.imagepicker.ImagePicker;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.beauty.girlbeauty.MainActivity;
 import com.beauty.girlbeauty.R;
 import com.beauty.girlbeauty.databinding.ActivityProductEditBinding;
 import com.beauty.girlbeauty.ui.HomepageActivity;
-import com.beauty.girlbeauty.ui.ui.add.AddFragment;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class ProductEditActivity extends AppCompatActivity {
 
