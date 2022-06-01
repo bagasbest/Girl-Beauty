@@ -72,8 +72,6 @@ public class ProfileFragment extends Fragment {
 
     private void checkLogin() {
         if(FirebaseAuth.getInstance().getCurrentUser() != null) {
-            initRecyclerView();
-            initViewModel();
 
             binding.noLogin.setVisibility(View.GONE);
             binding.content.setVisibility(View.VISIBLE);
@@ -100,10 +98,31 @@ public class ProfileFragment extends Fragment {
                             String hairType = "" + it.get("hairType");
                             String coloredHair = "" + it.get("coloredHair");
                             String hijabers = "" + it.get("hijabers");
+                            String role = "" + it.get("role");
 
                             ArrayList<String> skinConcern = (ArrayList<String>) it.get("skinConcern");
                             ArrayList<String> bodyConcern = (ArrayList<String>) it.get("bodyConcern");
                             ArrayList<String> hairConcern = (ArrayList<String>) it.get("hairConcern");
+
+                            if(role.equals("admin")) {
+                                binding.llAdmin.setVisibility(View.VISIBLE);
+                                String shopName = "" + it.get("shopName");
+                                String phone = "" + it.get("phone");
+                                String address = "" + it.get("address");
+
+                                binding.shopName.setText("Shop Name : " + shopName);
+                                binding.phone.setText("Phone Number : " + phone);
+                                binding.address.setText("Address : " + address);
+                                initRecyclerView();
+                                initViewModel();
+                            } else {
+                                binding.llUser.setVisibility(View.VISIBLE);
+                                binding.rvProduct.setVisibility(View.GONE);
+                                binding.view18.setVisibility(View.GONE);
+                                binding.textView21.setVisibility(View.GONE);
+                                binding.progressBar.setVisibility(View.GONE);
+                                binding.noData.setVisibility(View.GONE);
+                            }
 
                             if(!image.equals("")) {
                                 Glide.with(requireContext())

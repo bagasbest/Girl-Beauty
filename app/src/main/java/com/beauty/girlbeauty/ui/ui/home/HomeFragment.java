@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.beauty.girlbeauty.ui.ui.profile.PersonalInfoAdminActivity;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -74,20 +75,23 @@ public class HomeFragment extends Fragment {
 
                             if(role.equals("admin")) {
                                 binding.add.setVisibility(View.VISIBLE);
+                                String shopName = "" + documentSnapshot.get("shopName");
+                                if(shopName.equals("null")) {
+                                    startActivity(new Intent(getActivity(), PersonalInfoAdminActivity.class));
+                                }
+                            } else {
+                                String fullName = "" + documentSnapshot.get("fullName");
+                                String skinType = "" + documentSnapshot.get("skinType");
+                                ArrayList<String> skinConcern = (ArrayList<String>) documentSnapshot.get("skinConcern");
+
+                                if(fullName.equals("")) {
+                                    showPopupAccountStatus("personalInfo");
+                                } else if (skinType.equals("")) {
+                                    showPopupAccountStatus("beautyProfile");
+                                } else if (skinConcern == null) {
+                                    showPopupAccountStatus("beautyConcern");
+                                }
                             }
-
-                            String fullName = "" + documentSnapshot.get("fullName");
-                            String skinType = "" + documentSnapshot.get("skinType");
-                            ArrayList<String> skinConcern = (ArrayList<String>) documentSnapshot.get("skinConcern");
-
-                            if(fullName.equals("")) {
-                                showPopupAccountStatus("personalInfo");
-                            } else if (skinType.equals("")) {
-                                showPopupAccountStatus("beautyProfile");
-                            } else if (skinConcern == null) {
-                                showPopupAccountStatus("beautyConcern");
-                            }
-
                         }
                     });
         }

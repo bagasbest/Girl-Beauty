@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GirlBeauty">
         <activity
+            android:name=".ui.ui.profile.PersonalInfoAdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.ui.home.ProductAddActivity"
             android:exported="false" />
         <activity
